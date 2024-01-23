@@ -2,10 +2,16 @@
 
 import { Suspense, useState } from 'react'
 
+import { Tables } from '@/app/_types/supabase'
+
 import SearchBar from './search-bar'
 import SearchResult from './search-result'
 
-export default function Search() {
+interface Props {
+  items: Tables<'items'>[] | null
+}
+
+export default function Search({ items }: Readonly<Props>) {
   const [searchValue, setSearchValue] = useState('')
 
   const onChangeSearchValue = (value: string) => {
@@ -14,9 +20,15 @@ export default function Search() {
 
   return (
     <div className='relative'>
-      <SearchBar searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} />
+      <SearchBar
+        isItemExist={searchValue ? items?.some((item) => item.name_kor?.includes(searchValue)) ?? false : false}
+        searchValue={searchValue}
+        onChangeSearchValue={onChangeSearchValue}
+      />
       <Suspense>
-        <SearchResult searchValue={searchValue} />
+        <SearchResult
+          items={searchValue ? items?.filter((item) => item.name_kor?.includes(searchValue)).slice(0, 5) ?? [] : []}
+        />
       </Suspense>
     </div>
   )
