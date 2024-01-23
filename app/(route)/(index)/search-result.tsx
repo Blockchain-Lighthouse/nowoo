@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { use } from 'react'
-
 import { ROUTES } from '@/app/_constants/routes'
 
 import { getItemImage, getItems } from './utils'
@@ -11,8 +9,8 @@ interface Props {
   searchValue: string
 }
 
-export default function SearchResult({ searchValue }: Readonly<Props>) {
-  const items = use(getItems())
+export default async function SearchResult({ searchValue }: Readonly<Props>) {
+  const items = await getItems()
   const filteredItems = items?.filter((item) => item.name_kor?.includes(searchValue)).slice(0, 5)
 
   if (!searchValue || !filteredItems?.length) return null
