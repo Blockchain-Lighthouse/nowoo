@@ -1,7 +1,7 @@
-import { Tables } from '@/app/_types/supabase'
+import supabase from '@/app/_lib/utils/supabase'
 
 export const getItems = async () => {
-  const items = (await fetch('http://localhost:3000/api/items').then((res) => res.json())) as Tables<'items'>[] | null
+  const items = await supabase.from('items').select()
   return items
 }
 

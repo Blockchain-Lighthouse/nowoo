@@ -4,8 +4,11 @@ import { Suspense } from 'react'
 
 import PopularItems from './popular-items'
 import Search from './search'
+import { getItems } from './utils'
 
 export default async function HomePage() {
+  const { data: items } = await getItems()
+
   return (
     <section className='flex flex-col items-center gap-4 p-24'>
       <Image
@@ -14,7 +17,7 @@ export default async function HomePage() {
         height={180}
         alt=''
       />
-      <Search />
+      <Search items={items} />
       <div className='mt-4 h-[200px] w-[1200px] max-w-full bg-white' />
       <div className='mt-8 flex w-full gap-10'>
         <Suspense>
