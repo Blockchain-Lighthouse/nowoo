@@ -1,14 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { use } from 'react'
-
 import { ROUTES } from '@/app/_constants/routes'
 
 import { getItemImage, getItems } from './utils'
 
-export default function PopularItems() {
-  const items = use(getItems())?.slice(0, 5)
+export default async function PopularItems() {
+  const items = (await getItems())?.slice(0, 5)
 
   return (
     <div className='flex w-full flex-col gap-8'>

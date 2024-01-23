@@ -1,23 +1,11 @@
-'use client'
-
 import Image from 'next/image'
 
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 
 import PopularItems from './popular-items'
-import SearchBar from './search-bar'
-import SearchResult from './search-result'
-import { getItems } from './utils'
+import Search from './search'
 
-export default function HomePage() {
-  getItems()
-
-  const [searchValue, setSearchValue] = useState('')
-
-  const onChangeSearchValue = (value: string) => {
-    setSearchValue(value)
-  }
-
+export default async function HomePage() {
   return (
     <section className='flex flex-col items-center gap-4 p-24'>
       <Image
@@ -26,15 +14,13 @@ export default function HomePage() {
         height={180}
         alt=''
       />
-      <SearchBar searchValue={searchValue} onChangeSearchValue={onChangeSearchValue}>
-        <Suspense>
-          <SearchResult searchValue={searchValue} />
-        </Suspense>
-      </SearchBar>
+      <Search />
       <div className='mt-4 h-[200px] w-[1200px] max-w-full bg-white' />
       <div className='mt-8 flex w-full gap-10'>
-        <PopularItems />
-        <PopularItems />
+        <Suspense>
+          <PopularItems />
+          <PopularItems />
+        </Suspense>
       </div>
     </section>
   )
