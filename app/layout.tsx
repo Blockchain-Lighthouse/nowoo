@@ -62,6 +62,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head>
+        <link rel='icon' href='/favicon.ico' sizes='any' />
+      </head>
       <body className={cn(pretendard.className, 'min-h-dvh')}>
         <VercelAnalytics />
         <GoogleAnalytics />
