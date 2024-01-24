@@ -27,7 +27,7 @@ export default async function Page({
   if (!item) return notFound()
 
   return (
-    <section className='flex flex-col items-center gap-4 p-24 max-sm:p-4'>
+    <section className='flex flex-col items-center gap-4 p-24 max-sm:px-4 max-sm:py-16'>
       <Image
         className='aspect-square object-contain'
         src={`https://maplestory.io/api/gms/62/item/${item.maple_item_id}/icon?resize=3`}
