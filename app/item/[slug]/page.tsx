@@ -65,7 +65,7 @@ export default async function Page({ params, searchParams }: Readonly<Props>) {
             </div>
           </div>
           <div className='mt-4 flex flex-col'>
-            <span>업그레이드 가능 횟수: {item.upgradable_count}</span>
+            <span>업그레이드 가능 횟수: {item.upgradable_count ?? 0}</span>
           </div>
           <div className='mt-4 flex w-80 justify-center bg-[#FB9E48] p-4'>
             <span className='text-white'>상점 거래가: {item.price_shop ?? 0} 메소</span>

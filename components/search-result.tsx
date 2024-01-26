@@ -34,7 +34,6 @@ export default async function SearchResult({ searchQuery }: Readonly<Props>) {
                 key={item.id}
                 className='flex items-center gap-4 px-4 py-2 hover:bg-[#FB9E48] hover:text-white'
                 href={item.maple_item_id ? ROUTES.ITEM(item.maple_item_id) : ROUTES.HOME}
-                replace={true}
               >
                 <Image
                   className='aspect-square object-contain'
@@ -58,7 +57,6 @@ export default async function SearchResult({ searchQuery }: Readonly<Props>) {
                 key={monster.id}
                 className='flex items-center gap-4 px-4 py-2 hover:bg-[#FB9E48] hover:text-white'
                 href={monster.maple_mob_id ? ROUTES.MONSTER(monster.maple_mob_id) : ROUTES.HOME}
-                replace={true}
               >
                 <Image
                   className='aspect-square object-contain'
