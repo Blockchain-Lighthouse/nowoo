@@ -24,7 +24,7 @@ export default async function SearchResult({ searchQuery }: Readonly<Props>) {
   if (!items?.length && !monsters?.length) return null
 
   return (
-    <div className='absolute top-full z-10 min-h-8 w-full rounded-b-[30px] bg-white shadow-md'>
+    <div className='absolute top-full z-10 max-h-96 min-h-8 w-full overflow-y-auto rounded-b-[30px] bg-white shadow-md'>
       {items && (
         <div className='flex flex-col gap-4 py-8'>
           <div className='text-center text-2xl font-bold text-gray-600'>아이템</div>
