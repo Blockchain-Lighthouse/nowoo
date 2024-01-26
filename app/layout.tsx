@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'NOWOO - 메이플랜드 아이템 검색 사이트',
     description: '메이플랜드 아이템 검색 사이트',
+    url: 'https://nowoo.kr',
     images: [
       {
         url: openGraphImage,
