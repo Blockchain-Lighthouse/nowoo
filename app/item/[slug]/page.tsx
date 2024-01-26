@@ -3,28 +3,35 @@ import { notFound } from 'next/navigation'
 
 import Logo from '@/components/logo'
 import Search from '@/components/search'
-import { getItemImage, getItems, getMonsters } from '@/lib/utils'
+import { getItemImage } from '@/lib/utils'
+import supabase from '@/lib/utils/supabase'
 
 interface Props {
   params: {
     slug: string
   }
+  searchParams?: {
+    query?: string
+  }
 }
 
-export default async function Page({ params }: Readonly<Props>) {
+export default async function Page({ params, searchParams }: Readonly<Props>) {
   const { slug } = params
 
-  const items = await getItems()
-  const monsters = await getMonsters()
-
-  const item = items.find(({ maple_item_id }) => maple_item_id?.toString() === slug)
+  const { data: item } = await supabase
+    .from('items')
+    .select(
+      'id, maple_item_id, name_kor, name_eng, category, sub_category, overall_category, req_level, req_str, req_dex, req_int, req_luk, req_pop, price_shop, upgradable_count'
+    )
+    .match({ maple_item_id: slug })
+    .single()
 
   if (!item) return notFound()
 
   return (
     <section className='flex flex-col items-center gap-4 p-24 max-sm:px-4 max-sm:py-16'>
       <Logo />
-      <Search items={items} monsters={monsters} />
+      <Search query={searchParams?.query || ''} />
       <div className='mt-8 flex w-[580px] max-w-full flex-col items-center rounded-md bg-white shadow-md'>
         <div className='mt-5 flex w-full flex-col items-center gap-1 bg-[#FEF9EE] p-2'>
           <h1 className='text-xl font-semibold'>{item.name_kor}</h1>
