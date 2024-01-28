@@ -3,7 +3,7 @@ import Link from 'next/link'
 export function Menu() {
   return (
     <div className='flex'>
-      <Link className='border-r border-[#BCBCBC] px-6' href='/'>
+      <Link className='border-r border-[#BCBCBC] px-6' href='/board/free'>
         자유게시판
       </Link>
       <Link className='border-r border-[#BCBCBC] px-6' href='/'>
