@@ -1,3 +1,5 @@
+'use server'
+
 import * as argon2 from 'argon2'
 
 import supabase from '@/lib/utils/supabase'
@@ -5,21 +7,22 @@ import supabase from '@/lib/utils/supabase'
 export async function createBoard({
   title,
   content,
-  name,
+  writer,
   password,
 }: {
   title: string
   content: string
-  name: string
+  writer: string
   password: string
 }) {
-  'use server'
-  await supabase.from('board').insert([
+  const response = await supabase.from('boards').insert([
     {
       title,
-      content,
-      name,
+      description: content,
+      writer,
       password: await argon2.hash(password),
     },
   ])
+
+  return response.status === 201
 }

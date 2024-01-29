@@ -1,37 +1,57 @@
 'use client'
 
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { minLength, object, string } from 'valibot'
+import { minLength, object, Output, string } from 'valibot'
 
 import Logo from '@/components/logo'
 import { Menu } from '@/components/menu'
 import SearchForm from '@/components/search-form'
+import { ROUTES } from '@/constants/routes'
+
+import { QUERY_KEY } from '../utils'
+import { createBoard } from './action'
 
 const boardSchema = object({
   title: string('제목을 입력해주세요.', [minLength(1, '제목을 입력해주세요.')]),
   content: string('내용을 입력해주세요.', [minLength(1, '내용을 입력해주세요.')]),
-  name: string('이름을 입력해주세요.', [minLength(1, '이름을 입력해주세요.')]),
+  writer: string('이름을 입력해주세요.', [minLength(1, '이름을 입력해주세요.')]),
   password: string('비밀번호을 입력해주세요.', [minLength(1, '비밀번호을 입력해주세요.')]),
 })
 
-// type BoardSchema = Output<typeof boardSchema>
+type BoardSchema = Output<typeof boardSchema>
 
 export default function Page() {
+  const router = useRouter()
+  const queryClient = useQueryClient()
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<BoardSchema>({
     resolver: valibotResolver(boardSchema),
   })
+
+  const onSubmit = async (data: BoardSchema) => {
+    if (await createBoard(data)) {
+      alert('등록되었습니다.')
+      router.push(ROUTES.FREE_BOARD.LIST)
+      return queryClient.invalidateQueries({
+        queryKey: QUERY_KEY.FREE_BOARD,
+      })
+    } else {
+      alert('등록에 실패하였습니다.')
+    }
+  }
 
   return (
     <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-4 p-24 max-lg:px-4 max-lg:py-16'>
       <Logo />
       <Menu />
       <SearchForm />
-      <form className='mt-32 w-full'>
+      <form className='mt-32 w-full' onSubmit={handleSubmit(onSubmit)}>
         <div className='border-b border-[#D8D8D8] pb-6'>
           <h1 className='text-2xl font-bold'>자유게시판</h1>
         </div>
@@ -64,9 +84,9 @@ export default function Page() {
               <input
                 className='w-full rounded-md border-none px-5 py-3'
                 placeholder='이름을 입력해주세요.'
-                {...register('name')}
+                {...register('writer')}
               />
-              {errors.name && <span className='text-sm text-red-600'>{errors.name.message?.toString()}</span>}
+              {errors.writer && <span className='text-sm text-red-600'>{errors.writer.message?.toString()}</span>}
             </div>
           </div>
           <div className='flex items-center border-b border-[#D8D8D8] px-4 py-3'>
@@ -74,6 +94,7 @@ export default function Page() {
             <div className='flex-1'>
               <input
                 className='w-full rounded-md border-none px-5 py-3'
+                type='password'
                 placeholder='비밀번호을 입력해주세요.'
                 {...register('password')}
               />
