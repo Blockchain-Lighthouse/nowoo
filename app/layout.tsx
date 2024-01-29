@@ -77,13 +77,13 @@ export default function RootLayout({
       </body>
       {process.env.NODE_ENV === 'production' && (
         <>
-          <Script async src='https://d-collect.jennifersoft.com/9fcd1340/demian.js' />
+          <Script async src='https://d-collect.jennifersoft.com/7e49137d/demian.js' />
           <Script id='jennifer-frontend'>
             {`
       (function(j,ennifer) {
         j['dmndata']=[];j['jenniferFront']=function(args){window.dmndata.push(args)};
         j['dmnaid']=ennifer;j['dmnatime']=new Date();j['dmnanocookie']=false;j['dmnajennifer']='JENNIFER_FRONT@INTG';
-    }(window, '9fcd1340'));
+    }(window, '7e49137d'));
         `}
           </Script>
         </>
