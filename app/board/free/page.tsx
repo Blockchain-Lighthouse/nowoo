@@ -6,7 +6,7 @@ import SearchForm from '@/components/search-form'
 
 export default async function Page() {
   return (
-    <section className='flex flex-col items-center gap-4 p-24 max-lg:px-4 max-lg:py-16'>
+    <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-4 p-24 max-lg:px-4 max-lg:py-16'>
       <Logo />
       <Menu />
       <SearchForm />
