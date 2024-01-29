@@ -71,7 +71,7 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body className={cn(inter.className, 'min-h-dvh text-[#222222]')}>
+      <body className={cn(inter.className, 'min-h-dvh text-[#222222] max-md:text-sm')}>
         <CoreProvider>{children}</CoreProvider>
         <GoogleAnalytics />
       </body>
