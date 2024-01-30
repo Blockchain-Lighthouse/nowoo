@@ -5,14 +5,16 @@ import Link from 'next/link'
 
 import { ROUTES } from '@/constants/routes'
 
-import { useBoard } from './utils'
+import { Boards } from './utils'
 
-export default function Boards() {
-  const boardQuery = useBoard({ page: 1, pageSize: 10 })
+interface Props {
+  boards: Boards['data']
+}
 
+export function Boards({ boards }: Props) {
   return (
     <div className='flex flex-col border-t border-[#D8D8D8]'>
-      {boardQuery.data.data.map((board) => (
+      {boards?.map((board) => (
         <Link
           className='flex justify-between border-b border-[#D8D8D8] px-10 py-6 max-md:px-2'
           href={ROUTES.FREE_BOARD.DETAIL(board.id)}
