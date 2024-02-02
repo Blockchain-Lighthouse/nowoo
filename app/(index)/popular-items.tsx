@@ -14,7 +14,7 @@ export default async function PopularItems() {
   return (
     <div className='flex w-full flex-col gap-8 max-md:gap-4'>
       <span className='text-2xl font-bold'>다른 유저들이 선호하는 아이템</span>
-      <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-md:gap-2 max-md:p-4'>
+      <div className='flex flex-col gap-4 rounded-md bg-white p-12 shadow-md dark:bg-gray-500 max-md:gap-2 max-md:p-4'>
         {items?.map((item) => (
           <Link className='flex items-center gap-8' key={item.id} href={ROUTES.ITEM(item.maple_item_id)}>
             <Image

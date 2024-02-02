@@ -8,6 +8,7 @@ import { Fragment } from 'react'
 import CoreProvider from '@/components/core-provider'
 import Footer from '@/components/footer'
 import GoogleAnalytics from '@/components/google-analytics'
+import ThemeToggleButton from '@/components/theme-toggle-button'
 import { openGraphImage } from '@/constants/open-graph'
 import { cn } from '@/lib/utils'
 
@@ -73,16 +74,11 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body className={cn(inter.className, 'text-[#222222] max-md:text-sm')}>
+      <body className={cn(inter.className, 'text-[#222222] dark:text-gray-100 max-md:text-sm')}>
         <CoreProvider>
-          <div className='min-h-[calc(100dvh-200px)] bg-gray-100'>{children}</div>
+          <ThemeToggleButton />
+          <div className='min-h-[calc(100dvh-200px)] bg-gray-100 dark:bg-slate-950'>{children}</div>
           <Footer />
-          {/* <button
-            className='g-recaptcha invisible'
-            data-sitekey='6Lf80GIpAAAAANfO7xqEa9kgIVF2KEaqP_TpFOR3'
-            data-callback='onSubmit'
-            data-action='submit'
-          ></button> */}
         </CoreProvider>
       </body>
       {process.env.NODE_ENV === 'production' && (
@@ -99,7 +95,6 @@ export default function RootLayout({
           </Script>
         </Fragment>
       )}
-      {/* <Script src='https://www.google.com/recaptcha/api.js' strategy='afterInteractive' /> */}
     </html>
   )
 }

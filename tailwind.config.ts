@@ -9,6 +9,7 @@ const config: Config = {
   future: {
     hoverOnlyWhenSupported: true,
   },
+  darkMode: 'class',
   theme: {
     extend: {},
   },

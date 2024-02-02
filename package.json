@@ -34,7 +34,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.3",
     "tailwind-merge": "^2.2.1",
-    "use-debounce": "^10.0.0",
+    "usehooks-ts": "^2.12.1",
     "valibot": "^0.27.1"
   },
   "devDependencies": {

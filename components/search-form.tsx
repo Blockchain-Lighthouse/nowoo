@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 import { Suspense, useCallback, useRef, useState } from 'react'
 
 import { ROUTES } from '@/constants/routes'
-import { useDebounce } from '@/lib/hooks/use-debounce'
-import { useOutsideClick } from '@/lib/hooks/use-outside-click'
+import { useOnClickOutside } from '@/lib/hooks'
+import { useDebounceValue } from '@/lib/hooks'
 import { cn } from '@/lib/utils'
 
 import SearchResult from './search-result'
@@ -33,7 +33,7 @@ export default function SearchForm() {
 
   const searchFormRef = useRef<HTMLDivElement>(null)
   const [searchValue, setSearchValue] = useState('')
-  const debouncedSearchValue = useDebounce(searchValue, 250)
+  const [debouncedSearchValue] = useDebounceValue(searchValue, 250)
   const [isFocused, setIsFocused] = useState(false)
   const [firstSearchResult, setFirstSearchResult] = useState<Items['data'][0] | Monsters['data'][0] | null>(null)
 
@@ -70,7 +70,7 @@ export default function SearchForm() {
     [firstSearchResult, router]
   )
 
-  useOutsideClick({ ref: searchFormRef, handler: () => setIsFocused(false) })
+  useOnClickOutside(searchFormRef, () => setIsFocused(false))
 
   return (
     <div className='relative w-[500px] max-md:w-full max-md:max-w-[500px]'>

@@ -28,6 +28,7 @@
     "sitekey",
     "supabase",
     "upsert",
+    "usehooks",
     "valibot"
   ]
 }
