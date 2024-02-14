@@ -7,6 +7,60 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:1234@localhost:3000/test"
+  url      = "mysql://root:1234@localhost:3306/test"
 }
 
+model Letters {
+  id Int @id @default(autoincrement())
+  content String @db.LongText
+  from Int
+  to Int
+  coin Int @default(0)
+  createdDt DateTime @default(now())
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+  role Int @default(0)
+  coin Int @default(0)
+  createdDt DateTime @default(now())
+  updatedDt DateTime @updatedAt
+  deletedDt DateTime?
+}
+
+// *category
+// 0 = 공지 1 = 자유 2 = 파티 3 = 거래 (일반거래) 4 = 팁게 5 = 아트 게시판 9 = 신고 & 건의 게시판
+model Boards {
+  id Int @id @default(autoincrement())
+  title String
+  description String @db.LongText
+  writer Int // User ID
+  category Int
+  createdDt DateTime @default(now())
+  udpatedDt DateTime @updatedAt
+  deletedDt DateTime?
+}
+
+model Comments {
+  id Int @id @default(autoincrement())
+  parent_comment Int?
+  boardId Int
+  userId Int
+  createdDt DateTime @default(now())
+  updatedDt DateTime @updatedAt
+}
+
+// * Status 
+// 0 = 경매시작 || 1 = 경매 종료 || 2 = 대금 지불 완료(구매자) || 3 = 물건 전달 완료 (판매자)<거래완료> || 9 = 신고 정지글
+model Auctions {
+  id Int @id @default(autoincrement())
+  item_id Int
+  description String @db.LongText
+  price Int
+  status Int
+  createdDt DateTime @default(now())
+  startDt DateTime?
+  endDt DateTime?
+}
