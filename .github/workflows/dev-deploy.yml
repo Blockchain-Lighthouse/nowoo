@@ -21,7 +21,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.VERCEL_DEPLOY_TOKEN }}
         with:
           source-directory: 'output'
-          destination-github-username: w00khyung
+          destination-github-username: nolangwoosan
           destination-repository-name: nowoo
           user-email: ${{ secrets.OFFICIAL_ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
