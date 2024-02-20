@@ -17,6 +17,9 @@
   "css.validate": false,
   "editor.inlineSuggest.enabled": true,
   "css.lint.unknownAtRules": "ignore",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
   "cSpell.words": [
     "commitlint",
     "defence",
