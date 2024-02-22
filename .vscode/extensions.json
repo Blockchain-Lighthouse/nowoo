@@ -5,6 +5,7 @@
     "biomejs.biome",
     "streetsidesoftware.code-spell-checker",
     "EditorConfig.EditorConfig",
-    "Vitest.vitest"
+    "vitest.explorer",
+    "ms-playwright.playwright"
   ]
 }
