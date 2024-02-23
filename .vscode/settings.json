@@ -6,16 +6,28 @@
     "_types": "Typescript",
     "(route)": "Routes"
   },
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   },
   "editor.quickSuggestions": {
     "strings": true
-  },
-  "css.validate": false,
-  "editor.inlineSuggest.enabled": true,
-  "css.lint.unknownAtRules": "ignore",
-  "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
   }
 }

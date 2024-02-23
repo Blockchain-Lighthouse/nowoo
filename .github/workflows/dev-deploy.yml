@@ -20,7 +20,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.DEV_VERCEL_DEPLOY_TOKEN }}
         with:
-          source-directory: 'output'
+          source-directory: "output"
           destination-github-username: nolangwoosan
           destination-repository-name: nowoo
           user-email: ${{ secrets.DEV_OFFICIAL_ACCOUNT_EMAIL }}
