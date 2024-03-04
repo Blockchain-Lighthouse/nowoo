@@ -8,7 +8,7 @@ export function Menu() {
   return (
     <div className='flex'>
       <Link className='border-r border-[#BCBCBC] px-6 max-md:px-4' href={ROUTES.FREE_BOARD.LIST}>
-        자유게시판
+        게시판
       </Link>
       <a
         className='border-r border-[#BCBCBC] px-6 max-md:px-4'

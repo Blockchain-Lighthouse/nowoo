@@ -1,12 +1,10 @@
 'use client'
 
+import { cn } from '@/shared/tailwind-merge'
 import * as Tabs from '@radix-ui/react-tabs'
 import { Pencil } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
-
-import { cn } from '@/shared/tailwind-merge'
-
+import { useEffect, useState } from 'react'
 import { useBoard } from '../lib/use-board'
 import { Board } from './board'
 import { BoardsSkeletonUi } from './board-skeleton-ui'
@@ -20,6 +18,10 @@ interface Props {
 
 const tabs = [
   { id: 'all', name: '전체 글' },
+  { id: 'notice', name: '공지 게시판' },
+  { id: 'free', name: '자유 게시판' },
+  { id: 'party', name: '파티 게시판' },
+  { id: 'trade', name: '거래 게시판' },
   // { id: 'trade', name: '거래 글' },
 ]
 
@@ -30,6 +32,13 @@ export function FreeBoardPage({ page }: Readonly<Props>) {
   const [currentPage, setCurrentPage] = useState(page ? Number(page) : 1)
   const boardQuery = useBoard({ page: currentPage, pageSize: PAGE_SIZE })
 
+  useEffect(() => {
+    // TODO :
+    // IF TAB CHANGE TO Specific id,
+    // Get Board.
+    console.log(currentTab)
+  }, [currentTab])
+
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber)
   }
@@ -37,6 +46,7 @@ export function FreeBoardPage({ page }: Readonly<Props>) {
   return (
     <div className='mt-24 w-full'>
       <Tabs.Root defaultValue={tabs[0].id} value={currentTab} onValueChange={setCurrentTab}>
+        {/* Board Tabs */}
         <div className='mb-2 flex items-end justify-between'>
           <Tabs.List className='flex gap-2'>
             {tabs.map((tab) => (
@@ -62,6 +72,7 @@ export function FreeBoardPage({ page }: Readonly<Props>) {
           </Link>
         </div>
 
+        {/* Board Contents */}
         <Tabs.Content value={tabs[0].id}>
           {boardQuery.isLoading && <BoardsSkeletonUi />}
           {boardQuery.isSuccess && (
@@ -76,20 +87,6 @@ export function FreeBoardPage({ page }: Readonly<Props>) {
             </>
           )}
         </Tabs.Content>
-        {/* <Tabs.Content value={tabs[1].id}>
-          {boardQuery.isLoading && <BoardsSkeletonUi />}
-          {boardQuery.isSuccess && (
-            <>
-              <Boards boards={boardQuery.data.data ?? []} />
-              <Pagination
-                itemsPerPage={PAGE_SIZE}
-                totalItems={boardQuery.data.count}
-                currentPage={currentPage}
-                paginate={paginate}
-              />
-            </>
-          )}
-        </Tabs.Content> */}
       </Tabs.Root>
     </div>
   )
